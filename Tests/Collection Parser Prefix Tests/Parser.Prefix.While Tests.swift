@@ -54,7 +54,7 @@ extension `Parser.Prefix.While`.`Edge Case` {
 
         var input = Parser.Test.Input([0x31, 0x32, 0x78])
 
-        #expect(throws: Parser.Constraint.Error.self) {
+        #expect(throws: Parser.Prefix.While<Parser.Test.Input>.Error.self) {
             try parser.parse(&input)
         }
     }

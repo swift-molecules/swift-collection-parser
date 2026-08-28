@@ -17,10 +17,25 @@ extension Parser.Discard.Exactly: Parser.`Protocol` {
 
     public typealias Output = Void
 
-    public typealias Failure = Parser.Constraint.Error
+    public typealias Failure = Error
 
     @inlinable
     public func parse(_ input: inout Input) throws(Failure) {
-        _ = try Parser.Consume.Exactly<Input>(count).parse(&input)
+        do throws(Parser.Consume.Exactly<Input>.Error) {
+            _ = try Parser.Consume.Exactly<Input>(count).parse(&input)
+        } catch {
+            switch error {
+            case .countTooLow(let expected, let got):
+                throw .countTooLow(expected: expected, got: got)
+            }
+        }
+    }
+}
+
+extension Parser.Discard.Exactly {
+
+    public enum Error: Swift.Error, Sendable, Equatable {
+
+        case countTooLow(expected: Int, got: Int)
     }
 }

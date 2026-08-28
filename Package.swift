@@ -51,7 +51,6 @@ let package = Package(
             name: "Collection Parser Consume",
             dependencies: [
                 .product(name: "Parser", package: "swift-parser"),
-                .product(name: "Parser Constraint", package: "swift-parser"),
                 .product(name: "Collection Slice", package: "swift-collection"),
             ]
         ),
@@ -60,7 +59,6 @@ let package = Package(
             dependencies: [
                 .target(name: "Collection Parser Consume"),
                 .product(name: "Parser", package: "swift-parser"),
-                .product(name: "Parser Constraint", package: "swift-parser"),
                 .product(name: "Collection Slice", package: "swift-collection"),
             ]
         ),
@@ -68,7 +66,6 @@ let package = Package(
             name: "Collection Parser Prefix",
             dependencies: [
                 .product(name: "Parser", package: "swift-parser"),
-                .product(name: "Parser Constraint", package: "swift-parser"),
                 .product(name: "Parser Match", package: "swift-parser"),
                 .product(name: "Collection Slice", package: "swift-collection"),
             ]

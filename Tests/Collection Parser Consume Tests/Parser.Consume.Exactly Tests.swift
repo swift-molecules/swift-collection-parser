@@ -38,7 +38,7 @@ extension `Parser.Consume.Exactly`.`Edge Case` {
         let parser = Parser.Consume.Exactly<Parser.Test.Input>(5)
         var input: Parser.Test.Input = [0x01, 0x02]
 
-        #expect(throws: Parser.Constraint.Error.self) {
+        #expect(throws: Parser.Consume.Exactly<Parser.Test.Input>.Error.self) {
             try parser.parse(&input)
         }
     }

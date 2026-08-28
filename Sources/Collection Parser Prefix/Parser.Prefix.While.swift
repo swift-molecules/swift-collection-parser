@@ -30,7 +30,7 @@ extension Parser.Prefix.While: Parser.`Protocol` {
 
     public typealias Output = Input
 
-    public typealias Failure = Parser.Constraint.Error
+    public typealias Failure = Error
 
     @inlinable
     public func parse(_ input: inout Input) throws(Failure) -> Output {
@@ -55,5 +55,13 @@ extension Parser.Prefix.While: Parser.`Protocol` {
         let result = input[input.startIndex..<endIndex]
         input = input[endIndex...]
         return result
+    }
+}
+
+extension Parser.Prefix.While {
+
+    public enum Error: Swift.Error, Sendable, Equatable {
+
+        case countTooLow(expected: Int, got: Int)
     }
 }
