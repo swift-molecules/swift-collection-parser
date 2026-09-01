@@ -33,7 +33,19 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-atoms/swift-input.git",
+            url: "https://github.com/swift-atoms/swift-index.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-iterator.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-ordinal.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-tagged.git",
             branch: "main"
         ),
     ],
@@ -90,9 +102,19 @@ let package = Package(
             name: "Collection Parser Test Support",
             dependencies: [
                 .product(name: "Parser", package: "swift-parser"),
-                .product(name: "Input Namespace", package: "swift-input"),
-                .product(name: "Input Slice", package: "swift-input"),
-                .product(name: "Collection Test Support", package: "swift-collection"),
+                .product(name: "Collection", package: "swift-collection"),
+                .product(name: "Collection Slice", package: "swift-collection"),
+                .product(name: "Index", package: "swift-index"),
+                .product(name: "Iterator", package: "swift-iterator"),
+                .product(name: "Iterator Chunk", package: "swift-iterator"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
+                .product(name: "Ordinal Successor", package: "swift-ordinal"),
+                .product(name: "Ordinal Tagged", package: "swift-ordinal"),
+                .product(name: "Tagged", package: "swift-tagged"),
+                .product(
+                    name: "Tagged Standard Library Integration",
+                    package: "swift-tagged"
+                ),
             ],
             path: "Tests/Support"
         ),
