@@ -90,6 +90,7 @@ let package = Package(
             name: "Collection Parser Test Support",
             dependencies: [
                 .product(name: "Parser", package: "swift-parser"),
+                .product(name: "Input Namespace", package: "swift-input"),
                 .product(name: "Input Slice", package: "swift-input"),
                 .product(name: "Collection Test Support", package: "swift-collection"),
             ],
