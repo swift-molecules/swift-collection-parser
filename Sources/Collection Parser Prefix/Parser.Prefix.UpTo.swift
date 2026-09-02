@@ -1,10 +1,15 @@
 public import Collection_Slice
+public import Parser
 
 extension Parser.Prefix {
 
-    public struct UpTo<Input: Collection.Slice.`Protocol`>
-
+    public struct UpTo<Input: Collection.Slice.`Protocol`>: Parser.`Protocol`
     where Input.Element: Equatable, Input.Element: Copyable {
+
+        public typealias Output = Input
+
+        public typealias Failure = Never
+
         @usableFromInline
         let delimiter: [Input.Element]
 
@@ -12,39 +17,32 @@ extension Parser.Prefix {
         public init(_ delimiter: [Input.Element]) {
             self.delimiter = delimiter
         }
-    }
-}
 
-extension Parser.Prefix.UpTo: Parser.`Protocol` {
+        @inlinable
+        public borrowing func parse(_ input: inout Input) -> Output {
+            var endIndex = input.startIndex
 
-    public typealias Output = Input
+            outer: while endIndex < input.endIndex {
 
-    public typealias Failure = Never
+                var checkIndex = endIndex
+                for element in delimiter {
+                    guard checkIndex < input.endIndex else {
+                        break outer
+                    }
+                    guard input[checkIndex] == element else {
 
-    @inlinable
-    public func parse(_ input: inout Input) throws(Failure) -> Output {
-        var endIndex = input.startIndex
-
-        outer: while endIndex < input.endIndex {
-
-            var checkIndex = endIndex
-            for element in delimiter {
-                guard checkIndex < input.endIndex else {
-                    break outer
+                        input.formIndex(after: &endIndex)
+                        continue outer
+                    }
+                    input.formIndex(after: &checkIndex)
                 }
-                guard input[checkIndex] == element else {
 
-                    input.formIndex(after: &endIndex)
-                    continue outer
-                }
-                input.formIndex(after: &checkIndex)
+                break
             }
 
-            break
+            let result = input[input.startIndex..<endIndex]
+            input = input[endIndex...]
+            return result
         }
-
-        let result = input[input.startIndex..<endIndex]
-        input = input[endIndex...]
-        return result
     }
 }

@@ -1,3 +1,7 @@
+import Collection_Protocol
+import Collection_Slice
+import Parser
+import Tagged_Standard_Library_Integration
 import Collection_Parser_Prefix
 import Collection_Parser_Test_Support
 import Testing

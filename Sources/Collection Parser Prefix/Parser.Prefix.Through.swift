@@ -1,16 +1,46 @@
 public import Collection_Slice
+public import Parser
 
 extension Parser.Prefix {
 
-    public struct Through<Input: Collection.Slice.`Protocol`>
-
+    public struct Through<Input: Collection.Slice.`Protocol`>: Parser.`Protocol`
     where Input.Element: Equatable, Input.Element: Copyable {
+
+        public typealias Output = Input
+
+        public typealias Failure = Parser.Prefix.Through<Input>.Error
+
         @usableFromInline
         let delimiter: [Input.Element]
 
         @inlinable
         public init(_ delimiter: [Input.Element]) {
             self.delimiter = delimiter
+        }
+
+        @inlinable
+        public borrowing func parse(_ input: inout Input) throws(Failure) -> Output {
+            var endIndex = input.startIndex
+
+            outer: while endIndex < input.endIndex {
+                var checkIndex = endIndex
+                for element in delimiter {
+                    guard checkIndex < input.endIndex else {
+                        break outer
+                    }
+                    guard input[checkIndex] == element else {
+                        input.formIndex(after: &endIndex)
+                        continue outer
+                    }
+                    input.formIndex(after: &checkIndex)
+                }
+
+                let result = input[input.startIndex..<checkIndex]
+                input = input[checkIndex...]
+                return result
+            }
+
+            throw .predicateFailed(description: "delimiter not found")
         }
     }
 }
@@ -20,37 +50,5 @@ where Input: Collection.Slice.`Protocol`, Input.Element: Equatable, Input.Elemen
 
     public enum Error: Swift.Error, Equatable {
         case predicateFailed(description: String)
-    }
-}
-
-extension Parser.Prefix.Through: Parser.`Protocol` {
-
-    public typealias Output = Input
-
-    public typealias Failure = Parser.Prefix.Through<Input>.Error
-
-    @inlinable
-    public func parse(_ input: inout Input) throws(Failure) -> Output {
-        var endIndex = input.startIndex
-
-        outer: while endIndex < input.endIndex {
-            var checkIndex = endIndex
-            for element in delimiter {
-                guard checkIndex < input.endIndex else {
-                    break outer
-                }
-                guard input[checkIndex] == element else {
-                    input.formIndex(after: &endIndex)
-                    continue outer
-                }
-                input.formIndex(after: &checkIndex)
-            }
-
-            let result = input[input.startIndex..<checkIndex]
-            input = input[checkIndex...]
-            return result
-        }
-
-        throw .predicateFailed(description: "delimiter not found")
     }
 }

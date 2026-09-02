@@ -64,6 +64,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Parser", package: "swift-parser"),
                 .product(name: "Collection Slice", package: "swift-collection"),
+                .product(name: "Tagged Standard Library Integration", package: "swift-tagged"),
             ]
         ),
         .target(
@@ -72,6 +73,7 @@ let package = Package(
                 .target(name: "Collection Parser Consume"),
                 .product(name: "Parser", package: "swift-parser"),
                 .product(name: "Collection Slice", package: "swift-collection"),
+                .product(name: "Tagged Standard Library Integration", package: "swift-tagged"),
             ]
         ),
         .target(
@@ -79,6 +81,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Parser", package: "swift-parser"),
                 .product(name: "Collection Slice", package: "swift-collection"),
+                .product(name: "Tagged Standard Library Integration", package: "swift-tagged"),
             ]
         ),
         .target(
@@ -86,6 +89,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Parser", package: "swift-parser"),
                 .product(name: "Collection Slice", package: "swift-collection"),
+                .product(name: "Tagged Standard Library Integration", package: "swift-tagged"),
             ]
         ),
         .target(
@@ -93,6 +97,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Parser", package: "swift-parser"),
                 .product(name: "Collection Slice", package: "swift-collection"),
+                .product(name: "Tagged Standard Library Integration", package: "swift-tagged"),
             ]
         ),
         .target(
@@ -121,6 +126,11 @@ let package = Package(
             dependencies: [
                 .target(name: "Collection Parser Consume"),
                 .target(name: "Collection Parser Test Support"),
+                .product(name: "Parser", package: "swift-parser"),
+                .product(name: "Collection", package: "swift-collection"),
+                .product(name: "Collection Protocol", package: "swift-collection"),
+                .product(name: "Collection Slice", package: "swift-collection"),
+                .product(name: "Tagged Standard Library Integration", package: "swift-tagged"),
             ]
         ),
         .testTarget(
@@ -128,6 +138,11 @@ let package = Package(
             dependencies: [
                 .target(name: "Collection Parser End"),
                 .target(name: "Collection Parser Test Support"),
+                .product(name: "Parser", package: "swift-parser"),
+                .product(name: "Collection", package: "swift-collection"),
+                .product(name: "Collection Protocol", package: "swift-collection"),
+                .product(name: "Collection Slice", package: "swift-collection"),
+                .product(name: "Tagged Standard Library Integration", package: "swift-tagged"),
             ]
         ),
         .testTarget(
@@ -135,6 +150,11 @@ let package = Package(
             dependencies: [
                 .target(name: "Collection Parser Prefix"),
                 .target(name: "Collection Parser Test Support"),
+                .product(name: "Parser", package: "swift-parser"),
+                .product(name: "Collection", package: "swift-collection"),
+                .product(name: "Collection Protocol", package: "swift-collection"),
+                .product(name: "Collection Slice", package: "swift-collection"),
+                .product(name: "Tagged Standard Library Integration", package: "swift-tagged"),
             ]
         ),
         .testTarget(
@@ -142,6 +162,11 @@ let package = Package(
             dependencies: [
                 .target(name: "Collection Parser Rest"),
                 .target(name: "Collection Parser Test Support"),
+                .product(name: "Parser", package: "swift-parser"),
+                .product(name: "Collection", package: "swift-collection"),
+                .product(name: "Collection Protocol", package: "swift-collection"),
+                .product(name: "Collection Slice", package: "swift-collection"),
+                .product(name: "Tagged Standard Library Integration", package: "swift-tagged"),
             ]
         ),
     ],

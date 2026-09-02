@@ -1,3 +1,6 @@
+import Collection_Protocol
+import Collection_Slice
+import Parser
 import Collection_Parser_End
 import Collection_Parser_Test_Support
 import Testing

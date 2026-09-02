@@ -1,8 +1,14 @@
 public import Collection_Slice
+public import Parser
 
 extension Parser.Consume {
 
-    public struct Exactly<Input: Collection.Slice.`Protocol`> {
+    public struct Exactly<Input: Collection.Slice.`Protocol`>: Parser.`Protocol` {
+
+        public typealias Output = Input
+
+        public typealias Failure = Error
+
         @usableFromInline
         let count: Int
 
@@ -10,31 +16,24 @@ extension Parser.Consume {
         public init(_ count: Int) {
             self.count = count
         }
-    }
-}
 
-extension Parser.Consume.Exactly: Parser.`Protocol` {
+        @inlinable
+        public borrowing func parse(_ input: inout Input) throws(Failure) -> Output {
+            var endIndex = input.startIndex
+            var actualCount = 0
+            while actualCount < count, endIndex < input.endIndex {
+                endIndex = input.index(after: endIndex)
+                actualCount += 1
+            }
 
-    public typealias Output = Input
+            guard actualCount == count else {
+                throw .countTooLow(expected: count, got: actualCount)
+            }
 
-    public typealias Failure = Error
-
-    @inlinable
-    public func parse(_ input: inout Input) throws(Failure) -> Output {
-        var endIndex = input.startIndex
-        var actualCount = 0
-        while actualCount < count, endIndex < input.endIndex {
-            endIndex = input.index(after: endIndex)
-            actualCount += 1
+            let result = input[input.startIndex..<endIndex]
+            input = input[endIndex...]
+            return result
         }
-
-        guard actualCount == count else {
-            throw .countTooLow(expected: count, got: actualCount)
-        }
-
-        let result = input[input.startIndex..<endIndex]
-        input = input[endIndex...]
-        return result
     }
 }
 

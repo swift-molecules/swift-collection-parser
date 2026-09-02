@@ -5,10 +5,10 @@ public import Iterator
 public import Iterator_Chunk
 public import Ordinal
 public import Ordinal_Successor
-public import Ordinal_Tagged
+import Ordinal_Tagged
 public import Parser
 public import Tagged
-@_exported public import Tagged_Standard_Library_Integration
+import Tagged_Standard_Library_Integration
 
 extension Parser {
 
