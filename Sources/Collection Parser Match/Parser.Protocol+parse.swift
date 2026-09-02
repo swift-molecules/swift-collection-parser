@@ -1,11 +1,23 @@
+import Collection_Parser_End
 public import Collection_Slice
+
+extension Parser {
+
+    public enum Collection {}
+}
+
+extension Parser.Collection {
+
+    public enum Error: Swift.Error, Equatable {
+        case expectedEnd(remaining: Int)
+    }
+}
 
 extension Parser.`Protocol` {
 
-    @inlinable
     public func parse(
         _ input: consuming Input
-    ) throws(Either<Failure, Parser.Match.Error>) -> Output
+    ) throws(Either<Failure, Parser.Collection.Error>) -> Output
     where Input: Collection.Slice.`Protocol` & Copyable, Output: Escapable {
         var input = input
         let output: Output
@@ -21,10 +33,9 @@ extension Parser.`Protocol` {
     }
 }
 
-extension Parser.`Protocol` where Failure == Parser.Match.Error {
+extension Parser.`Protocol` where Failure == Parser.Collection.Error {
 
-    @inlinable
-    public func parse(_ input: consuming Input) throws(Parser.Match.Error) -> Output
+    public func parse(_ input: consuming Input) throws(Parser.Collection.Error) -> Output
     where Input: Collection.Slice.`Protocol` & Copyable, Output: Escapable {
         var input = input
         let output = try parse(&input)

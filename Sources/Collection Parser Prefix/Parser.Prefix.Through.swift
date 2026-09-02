@@ -15,11 +15,19 @@ extension Parser.Prefix {
     }
 }
 
+extension Parser.Prefix.Through
+where Input: Collection.Slice.`Protocol`, Input.Element: Equatable, Input.Element: Copyable {
+
+    public enum Error: Swift.Error, Equatable {
+        case predicateFailed(description: String)
+    }
+}
+
 extension Parser.Prefix.Through: Parser.`Protocol` {
 
     public typealias Output = Input
 
-    public typealias Failure = Parser.Match.Error
+    public typealias Failure = Parser.Prefix.Through<Input>.Error
 
     @inlinable
     public func parse(_ input: inout Input) throws(Failure) -> Output {

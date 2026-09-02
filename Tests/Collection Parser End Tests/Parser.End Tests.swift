@@ -24,7 +24,7 @@ extension `Parser.End`.`Edge Case` {
         let parser = Parser.End<Parser.Test.Input>()
         var input: Parser.Test.Input = [0x01, 0x02]
 
-        #expect(throws: Parser.Match.Error.self) {
+        #expect(throws: Parser.End<Parser.Test.Input>.Error.self) {
             try parser.parse(&input)
         }
     }
@@ -34,7 +34,7 @@ extension `Parser.End`.`Edge Case` {
         let parser = Parser.End<Parser.Test.Input>()
         var input: Parser.Test.Input = [0xFF]
 
-        #expect(throws: Parser.Match.Error.self) {
+        #expect(throws: Parser.End<Parser.Test.Input>.Error.self) {
             try parser.parse(&input)
         }
     }

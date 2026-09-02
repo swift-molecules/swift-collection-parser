@@ -37,7 +37,7 @@ extension `Parser.Prefix.Through`.`Edge Case` {
         let parser = Parser.Prefix.Through<Parser.Test.Input>([0xFF])
         var input: Parser.Test.Input = [0x01, 0x02]
 
-        #expect(throws: Parser.Match.Error.self) {
+        #expect(throws: Parser.Prefix.Through<Parser.Test.Input>.Error.self) {
             try parser.parse(&input)
         }
     }

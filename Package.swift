@@ -53,8 +53,8 @@ let package = Package(
         .target(
             name: "Collection Parser Match",
             dependencies: [
+                .target(name: "Collection Parser End"),
                 .product(name: "Parser", package: "swift-parser"),
-                .product(name: "Parser Match", package: "swift-parser"),
                 .product(name: "Collection Slice", package: "swift-collection"),
                 .product(name: "Either", package: "swift-either"),
             ]
@@ -78,7 +78,6 @@ let package = Package(
             name: "Collection Parser Prefix",
             dependencies: [
                 .product(name: "Parser", package: "swift-parser"),
-                .product(name: "Parser Match", package: "swift-parser"),
                 .product(name: "Collection Slice", package: "swift-collection"),
             ]
         ),
@@ -92,9 +91,7 @@ let package = Package(
         .target(
             name: "Collection Parser End",
             dependencies: [
-                .target(name: "Collection Parser Match"),
                 .product(name: "Parser", package: "swift-parser"),
-                .product(name: "Parser Match", package: "swift-parser"),
                 .product(name: "Collection Slice", package: "swift-collection"),
             ]
         ),
@@ -103,6 +100,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Parser", package: "swift-parser"),
                 .product(name: "Collection", package: "swift-collection"),
+                .product(name: "Collection Protocol", package: "swift-collection"),
                 .product(name: "Collection Slice", package: "swift-collection"),
                 .product(name: "Index", package: "swift-index"),
                 .product(name: "Iterator", package: "swift-iterator"),
