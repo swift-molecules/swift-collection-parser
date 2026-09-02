@@ -34,7 +34,7 @@ extension Parser.Discard {
 
 extension Parser.Discard.Exactly {
 
-    public enum Error: Swift.Error, Sendable, Equatable {
+    public enum Error: Swift.Error, Equatable {
 
         case countTooLow(expected: Int, got: Int)
     }

@@ -59,7 +59,7 @@ extension Parser.Prefix {
 
 extension Parser.Prefix.While {
 
-    public enum Error: Swift.Error, Sendable, Equatable {
+    public enum Error: Swift.Error, Equatable {
 
         case countTooLow(expected: Int, got: Int)
     }
